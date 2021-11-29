@@ -19,15 +19,19 @@ import {
   Image,
   Spacer,
   Center,
+  chakra,
+  Flex,
 } from "@chakra-ui/react";
 import NavHeader from "./components/layout/header";
+import theme from "./theme";
+import { AiFillGithub } from "react-icons/ai";
 
 // https://remix.run/api/conventions#default-export
 // https://remix.run/api/conventions#route-filenames
 export default function App() {
   return (
     <Document>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <Layout>
           <Outlet />
         </Layout>
@@ -135,9 +139,14 @@ function Layout({ children }: { children: React.ReactNode }) {
         px={{ base: "4", md: "8" }}
       >
         <Center>
-          <Text alignSelf={{ base: "center", sm: "start" }}>
-            &copy; {new Date().getFullYear()} Greg (aka TheSlayer-666)
-          </Text>
+          <Flex>
+            <Text alignSelf={{ base: "center", sm: "start" }}>
+              &copy; {new Date().getFullYear()} Greg (aka TheSlayer-666)
+            </Text>
+            <chakra.a ml="13" href="https://github.com/TheSlayer-666">
+              <AiFillGithub size={25} />
+            </chakra.a>
+          </Flex>
         </Center>
       </Box>
     </Box>
