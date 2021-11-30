@@ -26,9 +26,9 @@ const LiquidityCollection = () => {
     {
       asset1: "SUSHI",
       asset2: "ETH",
-
-      price: 12.5,
-      amount: 29,
+      price1: 14,
+      price2: 4300,
+      amount: 0.5,
     },
   ];
   const gradient = useColorModeValue(
