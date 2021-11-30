@@ -51,8 +51,8 @@ const PositionCollection = () => {
         <Stack direction={{ base: "column" }} w="full">
           {data.map((asset, pid) => {
             return (
-              <>
-                <Flex pr={10} pl={2} key={pid}>
+              <React.Fragment key={pid}>
+                <Flex pr={10} pl={2}>
                   <Avatar mx="auto" mr={3}>
                     <chakra.p fontSize="12" mx="8">
                       {asset.name}
@@ -73,7 +73,7 @@ const PositionCollection = () => {
                   </VStack>
                 </Flex>
                 {data[pid] !== data[data.length - 1] ? <Divider /> : ""}
-              </>
+              </React.Fragment>
             );
           })}
         </Stack>
