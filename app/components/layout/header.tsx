@@ -16,17 +16,14 @@ import {
   InputGroup,
   Input,
   InputLeftElement,
+  Tooltip,
 } from "@chakra-ui/react";
-import {
-  AiFillBell,
-  AiFillHome,
-  AiOutlineInbox,
-  AiOutlineMenu,
-  AiOutlineSearch,
-} from "react-icons/ai";
-import { FaSun, FaMoon, FaUserAlt } from "react-icons/fa";
-import { BsFillCameraVideoFill, BsPlus } from "react-icons/bs";
+import { AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
+import { IoWalletOutline } from "react-icons/io5";
+import { FaSun, FaMoon, FaExchangeAlt } from "react-icons/fa";
+
 import React from "react";
+import { Link, useNavigate } from "remix";
 
 const NavHeader = () => {
   const bg = useColorModeValue("white", "gray.800");
@@ -34,6 +31,7 @@ const NavHeader = () => {
   const { toggleColorMode: toggleMode } = useColorMode();
   const text = useColorModeValue("dark", "light");
   const SwitchIcon = useColorModeValue(FaMoon, FaSun);
+  let navigate = useNavigate();
   return (
     <React.Fragment>
       <chakra.header
@@ -56,6 +54,7 @@ const NavHeader = () => {
                 onClick={mobileNav.onOpen}
               />
               <VStack
+                zIndex={10}
                 pos="absolute"
                 top={0}
                 left={0}
@@ -75,25 +74,70 @@ const NavHeader = () => {
                   justifySelf="self-start"
                   onClick={mobileNav.onClose}
                 />
-                <Button w="full" variant="ghost" leftIcon={<AiFillHome />}>
-                  Dashboard
-                </Button>
+
+                <chakra.a href="/" w="full">
+                  <Button
+                    w="full"
+                    variant="ghost"
+                    leftIcon={<IoWalletOutline />}
+                  >
+                    Dashboard
+                  </Button>
+                </chakra.a>
+                <Tooltip label="Coming Soon!">
+                  <div>
+                    <Button
+                      w="full"
+                      variant="ghost"
+                      leftIcon={<FaExchangeAlt />}
+                      disabled
+                    >
+                      Swap
+                    </Button>
+                  </div>
+                </Tooltip>
+                <InputGroup>
+                  <InputLeftElement
+                    pointerEvents="none"
+                    children={<AiOutlineSearch />}
+                  />
+                  <Input type="tel" placeholder="Address to lookup..." />
+                </InputGroup>
               </VStack>
             </Box>
             <chakra.a
               href="/"
-              title="Choc Home Page"
+              title="DDash Home Page"
               display="flex"
               alignItems="center"
             >
               <Image src="/logo.png" height={9} rounded={4} />
-              <VisuallyHidden>Choc</VisuallyHidden>
+              <VisuallyHidden>DDash</VisuallyHidden>
             </chakra.a>
 
             <HStack spacing={3} display={{ base: "none", md: "inline-flex" }}>
-              <Button variant="ghost" leftIcon={<AiFillHome />} size="sm">
-                Dashboard
-              </Button>
+              <chakra.a href="/">
+                <Button
+                  variant="ghost"
+                  leftIcon={<IoWalletOutline />}
+                  size="sm"
+                >
+                  Dashboard
+                </Button>
+              </chakra.a>
+
+              <Tooltip label="Coming Soon!">
+                <div>
+                  <Button
+                    variant="ghost"
+                    leftIcon={<FaExchangeAlt />}
+                    size="sm"
+                    disabled
+                  >
+                    Swap
+                  </Button>
+                </div>
+              </Tooltip>
             </HStack>
           </HStack>
           <HStack
@@ -111,14 +155,13 @@ const NavHeader = () => {
               onClick={toggleMode}
               icon={<SwitchIcon />}
             />
-            <InputGroup>
+            <InputGroup display={{ base: "none", md: "inline-flex" }}>
               <InputLeftElement
                 pointerEvents="none"
                 children={<AiOutlineSearch />}
               />
               <Input type="tel" placeholder="Address to lookup..." />
             </InputGroup>
-            <Avatar size="sm" />
           </HStack>
         </Flex>
       </chakra.header>

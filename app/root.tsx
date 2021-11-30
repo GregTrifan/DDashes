@@ -21,6 +21,9 @@ import {
   Center,
   chakra,
   Flex,
+  useColorMode,
+  useColorModeValue,
+  Heading,
 } from "@chakra-ui/react";
 import NavHeader from "./components/layout/header";
 import theme from "./theme";
@@ -86,12 +89,17 @@ export function CatchBoundary() {
 
   return (
     <Document title={`${caught.status} ${caught.statusText}`}>
-      <Layout>
-        <h1>
-          {caught.status}: {caught.statusText}
-        </h1>
-        {message}
-      </Layout>
+      <ChakraProvider theme={theme}>
+        <Layout>
+          <Center>
+            <Heading>
+              {caught.status}: {caught.statusText}
+            </Heading>
+          </Center>
+
+          <Center>{message}</Center>
+        </Layout>
+      </ChakraProvider>
     </Document>
   );
 }
@@ -124,7 +132,7 @@ function Document({
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <Box>
+    <Box bg={useColorModeValue("gray.50", "gray.900")}>
       <NavHeader />
       <Box minH="78vh">
         <Box mt="12">{children}</Box>

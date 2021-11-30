@@ -16,21 +16,19 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-const AssetCollection = () => {
+const PositionCollection = () => {
   // TODO: Replace with actual data
   const data = [
     { name: "MATIC", price: 1.3, amount: 69 },
     { name: "SUSHI", price: 12.5, amount: 29 },
-    { name: "UNI", price: 21.7, amount: 49 },
-    { name: "GALA", price: 0.8, amount: 4569 },
   ];
   const gradient = useColorModeValue(
-    "linear(to-tr, gray.200 0%, #94A6FF 100%)",
-    "linear(to-tr, #121a1f 0%, #1C319959 100%)"
+    "linear(to-bl, gray.200 0%, #94A6FF 100%)",
+    "linear(to-bl, #121a1f 0%, #1C319959 100%)"
   );
   return (
     <Box
-      mt="8"
+      mt="4"
       mx="auto"
       shadow="lg"
       py={6}
@@ -40,7 +38,7 @@ const AssetCollection = () => {
       bgGradient={gradient}
     >
       <Text px={4} fontWeight={600}>
-        Assets
+        Vaults
       </Text>
       <Box
         mt="4"
@@ -84,4 +82,4 @@ const AssetCollection = () => {
   );
 };
 
-export default AssetCollection;
+export default PositionCollection;

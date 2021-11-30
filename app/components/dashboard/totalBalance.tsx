@@ -3,6 +3,7 @@ import {
   useColorModeValue,
   Text,
   Heading,
+  Tooltip,
   VStack,
   Progress,
 } from "@chakra-ui/react";
@@ -10,16 +11,17 @@ import React from "react";
 
 const TotalBalance = () => {
   const gradient = useColorModeValue(
-    "linear(to-t, #E3FFE7D0, #D9E7FFC2)",
-    "linear(to-t, #80D0C7D0, #0094E9D8)"
+    "linear(to-t, #9EE7AA, #AFC6EE)",
+    "linear(to-t, #56AFA5, #0E73AD)"
   );
+
   return (
     <Box
       mx="auto"
-      maxW={{ base: "90vw", sm: "80vw", md: "70vw", lg: "60vw" }}
+      maxW={{ base: "90vw", sm: "80vw", md: "70vw", lg: "60vw", xl: "800px" }}
       spacing={0}
       rounded="md"
-      bg={useColorModeValue("#d9e7ff", "#0093E9")}
+      bg={useColorModeValue("#AFC6EE", "#0E73AD")}
     >
       <Box px={4} pt={6}>
         <Text fontWeight={600}>Portfolio Value</Text>
@@ -32,16 +34,19 @@ const TotalBalance = () => {
             69.42$
           </Heading>
         </VStack>
-        <Progress
-          value={91}
-          rounded="sm"
-          size="sm"
-          my="2"
-          colorScheme="green"
-        />
-        <Text fontWeight={500} opacity={0.8}>
-          9% Supplied, 91% Hodled{" "}
-        </Text>
+
+        <Tooltip hasArrow label="91% In wallet,9% Supplied" rounded="md">
+          <div>
+            <Progress
+              hasStripe
+              value={91}
+              rounded="sm"
+              size="sm"
+              my="2"
+              colorScheme="green"
+            />
+          </div>
+        </Tooltip>
       </Box>
     </Box>
   );

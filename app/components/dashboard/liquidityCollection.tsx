@@ -1,32 +1,39 @@
 import {
-  Avatar,
   Box,
-  Button,
-  chakra,
-  Divider,
   Flex,
-  Heading,
-  SimpleGrid,
-  Spacer,
-  Stack,
   Text,
-  useBreakpointValue,
+  Stack,
   useColorModeValue,
   VStack,
+  Heading,
+  Spacer,
+  Divider,
+  Avatar,
+  chakra,
 } from "@chakra-ui/react";
 import React from "react";
 
-const AssetCollection = () => {
-  // TODO: Replace with actual data
+const LiquidityCollection = () => {
   const data = [
-    { name: "MATIC", price: 1.3, amount: 69 },
-    { name: "SUSHI", price: 12.5, amount: 29 },
-    { name: "UNI", price: 21.7, amount: 49 },
-    { name: "GALA", price: 0.8, amount: 4569 },
+    {
+      asset1: "MATIC",
+      asset2: "USDT",
+
+      price1: 1.3,
+      price2: 1,
+      amount: 69,
+    },
+    {
+      asset1: "SUSHI",
+      asset2: "ETH",
+
+      price: 12.5,
+      amount: 29,
+    },
   ];
   const gradient = useColorModeValue(
-    "linear(to-tr, gray.200 0%, #94A6FF 100%)",
-    "linear(to-tr, #121a1f 0%, #1C319959 100%)"
+    "linear(to-tl, #84E8FF 0%, #8F98FF 100%)",
+    "linear(to-tl, #00323D, #000744)"
   );
   return (
     <Box
@@ -40,7 +47,7 @@ const AssetCollection = () => {
       bgGradient={gradient}
     >
       <Text px={4} fontWeight={600}>
-        Assets
+        Liquidity Provided
       </Text>
       <Box
         mt="4"
@@ -53,29 +60,36 @@ const AssetCollection = () => {
         <Stack direction={{ base: "column" }} w="full">
           {data.map((asset, pid) => {
             return (
-              <>
-                <Flex pr={10} pl={2} key={pid}>
-                  <Avatar mx="auto" mr={3}>
+              <React.Fragment key={pid}>
+                <Flex pr={10} pl={2}>
+                  <Avatar bgColor="blue.500">
                     <chakra.p fontSize="12" mx="8">
-                      {asset.name}
+                      {asset.asset1}
+                    </chakra.p>
+                  </Avatar>
+                  <Avatar ml="-1" mr={3} bgColor="#5347aa">
+                    <chakra.p fontSize="12" mx="8">
+                      {asset.asset2}
                     </chakra.p>
                   </Avatar>
                   <VStack alignItems="start">
-                    <Text opacity={0.6}>{asset.name}</Text>
+                    <Text opacity={0.6}>
+                      {asset.asset1}/{asset.asset2}
+                    </Text>
                     <Heading fontSize="md" fontWeight="300">
-                      {asset.price}$
+                      50/50
                     </Heading>
                   </VStack>
                   <Spacer />
                   <VStack alignItems="end" mx="auto">
                     <Heading fontSize="md" fontWeight="600">
-                      {(asset.amount * asset.price).toFixed(2)}$
+                      {(asset.amount * asset.price1 * asset.price2).toFixed(2)}$
                     </Heading>
                     <Text opacity={0.6}>{asset.amount}</Text>
                   </VStack>
                 </Flex>
                 {data[pid] !== data[data.length - 1] ? <Divider /> : ""}
-              </>
+              </React.Fragment>
             );
           })}
         </Stack>
@@ -84,4 +98,4 @@ const AssetCollection = () => {
   );
 };
 
-export default AssetCollection;
+export default LiquidityCollection;

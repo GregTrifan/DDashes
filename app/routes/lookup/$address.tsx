@@ -1,31 +1,18 @@
-import {
-  Box,
-  Center,
-  useColorModeValue,
-  VStack,
-  Text,
-  Heading,
-  Progress,
-  Tooltip,
-  useColorMode,
-  SimpleGrid,
-} from "@chakra-ui/react";
-import type { MetaFunction } from "remix";
+import React from "react";
+import { LoaderFunction, useLoaderData } from "remix";
 import AssetCollection from "~/components/dashboard/assetCollection";
 import LiquidityCollection from "~/components/dashboard/liquidityCollection";
 import PositionCollection from "~/components/dashboard/positionsCollection";
 import StakingCard from "~/components/dashboard/staking";
 import TotalBalance from "~/components/dashboard/totalBalance";
 
-// https://remix.run/api/conventions#meta
-export let meta: MetaFunction = () => {
-  return {
-    title: "DDashed",
-    description: "Your DeFi Dashboard!",
-  };
+export let loader: LoaderFunction = async ({ params }) => {
+  // retrieve address
+  return { param: params.address };
 };
 
-export default function Index() {
+const AddressWatchPage = () => {
+  let data = useLoaderData();
   return (
     <>
       <TotalBalance />
@@ -35,4 +22,6 @@ export default function Index() {
       <LiquidityCollection />
     </>
   );
-}
+};
+
+export default AddressWatchPage;
