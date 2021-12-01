@@ -98,11 +98,23 @@ const NavHeader = () => {
                   </div>
                 </Tooltip>
                 <InputGroup>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    children={<AiOutlineSearch />}
+                  <Input
+                    type="text"
+                    onChange={(e) => setSearchAddress(e.target.value)}
+                    placeholder="Address to lookup..."
                   />
-                  <Input type="tel" placeholder="Address to lookup..." />
+                  <InputRightElement>
+                    <Button
+                      height="full"
+                      size="sm"
+                      onClick={() => {
+                        if (searchAddress !== "")
+                          navigate(`/lookup/${searchAddress}`);
+                      }}
+                    >
+                      <AiOutlineSearch size={18} />
+                    </Button>
+                  </InputRightElement>
                 </InputGroup>
               </VStack>
             </Box>
@@ -165,7 +177,10 @@ const NavHeader = () => {
                 <Button
                   height="full"
                   size="sm"
-                  onClick={() => navigate(`/lookup/${searchAddress}`)}
+                  onClick={() => {
+                    if (searchAddress !== "")
+                      navigate(`/lookup/${searchAddress}`);
+                  }}
                 >
                   <AiOutlineSearch size={18} />
                 </Button>
