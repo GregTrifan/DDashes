@@ -17,12 +17,13 @@ import {
   Input,
   InputLeftElement,
   Tooltip,
+  InputRightElement,
 } from "@chakra-ui/react";
 import { AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
 import { IoWalletOutline } from "react-icons/io5";
 import { FaSun, FaMoon, FaExchangeAlt } from "react-icons/fa";
 
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "remix";
 
 const NavHeader = () => {
@@ -31,7 +32,8 @@ const NavHeader = () => {
   const { toggleColorMode: toggleMode } = useColorMode();
   const text = useColorModeValue("dark", "light");
   const SwitchIcon = useColorModeValue(FaMoon, FaSun);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const [searchAddress, setSearchAddress] = useState("");
   return (
     <React.Fragment>
       <chakra.header
@@ -75,15 +77,14 @@ const NavHeader = () => {
                   onClick={mobileNav.onClose}
                 />
 
-                <chakra.a href="/" w="full">
-                  <Button
-                    w="full"
-                    variant="ghost"
-                    leftIcon={<IoWalletOutline />}
-                  >
-                    Dashboard
-                  </Button>
-                </chakra.a>
+                <Button
+                  w="full"
+                  variant="ghost"
+                  onClick={() => navigate("/")}
+                  leftIcon={<IoWalletOutline />}
+                >
+                  Dashboard
+                </Button>
                 <Tooltip label="Coming Soon!">
                   <div>
                     <Button
@@ -116,15 +117,14 @@ const NavHeader = () => {
             </chakra.a>
 
             <HStack spacing={3} display={{ base: "none", md: "inline-flex" }}>
-              <chakra.a href="/">
-                <Button
-                  variant="ghost"
-                  leftIcon={<IoWalletOutline />}
-                  size="sm"
-                >
-                  Dashboard
-                </Button>
-              </chakra.a>
+              <Button
+                variant="ghost"
+                leftIcon={<IoWalletOutline />}
+                size="sm"
+                onClick={() => navigate("/")}
+              >
+                Dashboard
+              </Button>
 
               <Tooltip label="Coming Soon!">
                 <div>
@@ -156,11 +156,20 @@ const NavHeader = () => {
               icon={<SwitchIcon />}
             />
             <InputGroup display={{ base: "none", md: "inline-flex" }}>
-              <InputLeftElement
-                pointerEvents="none"
-                children={<AiOutlineSearch />}
+              <Input
+                type="text"
+                onChange={(e) => setSearchAddress(e.target.value)}
+                placeholder="Address to lookup..."
               />
-              <Input type="tel" placeholder="Address to lookup..." />
+              <InputRightElement>
+                <Button
+                  height="full"
+                  size="sm"
+                  onClick={() => navigate(`/lookup/${searchAddress}`)}
+                >
+                  <AiOutlineSearch size={18} />
+                </Button>
+              </InputRightElement>
             </InputGroup>
           </HStack>
         </Flex>

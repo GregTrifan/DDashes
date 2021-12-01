@@ -1,16 +1,5 @@
-import {
-  Box,
-  Center,
-  useColorModeValue,
-  VStack,
-  Text,
-  Heading,
-  Progress,
-  Tooltip,
-  useColorMode,
-  SimpleGrid,
-} from "@chakra-ui/react";
-import type { MetaFunction } from "remix";
+import { Button } from "@chakra-ui/react";
+import { Link, MetaFunction, useNavigate } from "remix";
 import AssetCollection from "~/components/dashboard/assetCollection";
 import LiquidityCollection from "~/components/dashboard/liquidityCollection";
 import PositionCollection from "~/components/dashboard/positionsCollection";
@@ -26,6 +15,7 @@ export let meta: MetaFunction = () => {
 };
 
 export default function Index() {
+  const navigate = useNavigate();
   return (
     <>
       <TotalBalance />
