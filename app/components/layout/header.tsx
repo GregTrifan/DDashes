@@ -18,6 +18,7 @@ import {
   InputLeftElement,
   Tooltip,
   InputRightElement,
+  InputRightAddon,
 } from "@chakra-ui/react";
 import { AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
 import { IoWalletOutline } from "react-icons/io5";
@@ -25,6 +26,7 @@ import { FaSun, FaMoon, FaExchangeAlt } from "react-icons/fa";
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "remix";
+import WalletButton from "./walletButton";
 
 const NavHeader = () => {
   const bg = useColorModeValue("white", "gray.800");
@@ -103,18 +105,19 @@ const NavHeader = () => {
                     onChange={(e) => setSearchAddress(e.target.value)}
                     placeholder="Address to lookup..."
                   />
-                  <InputRightElement>
-                    <Button
-                      height="full"
-                      size="sm"
+                  <InputRightAddon maxW="20" p="0" border="none">
+                    <IconButton
+                      width="10"
+                      borderLeftRadius="0"
+                      aria-label="search"
                       onClick={() => {
                         if (searchAddress !== "")
                           navigate(`/lookup/${searchAddress}`);
                       }}
                     >
                       <AiOutlineSearch size={18} />
-                    </Button>
-                  </InputRightElement>
+                    </IconButton>
+                  </InputRightAddon>
                 </InputGroup>
               </VStack>
             </Box>
@@ -173,19 +176,22 @@ const NavHeader = () => {
                 onChange={(e) => setSearchAddress(e.target.value)}
                 placeholder="Address to lookup..."
               />
-              <InputRightElement>
-                <Button
-                  height="full"
-                  size="sm"
+
+              <InputRightAddon maxW="20" p="0" border="none">
+                <IconButton
+                  width="10"
+                  borderLeftRadius="0"
+                  aria-label="search"
                   onClick={() => {
                     if (searchAddress !== "")
                       navigate(`/lookup/${searchAddress}`);
                   }}
                 >
                   <AiOutlineSearch size={18} />
-                </Button>
-              </InputRightElement>
+                </IconButton>
+              </InputRightAddon>
             </InputGroup>
+            <WalletButton />
           </HStack>
         </Flex>
       </chakra.header>
